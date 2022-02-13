@@ -93,41 +93,69 @@ function writeToFile(fileName, data) {
     console.log("-------------------------------------")
     console.log(data);
     let FullText=``
+    let Title=`# ${data.repoName} \n`
+    let Description=`## Description \n${data.motivation} ${data.codeProb} ${data.learned}\n`
     if(data.ynInst===true){
-        FullText=`# ${data.repoName} \n## Description \n${data.motivation} ${data.codeProb} ${data.learned}
-## Table of Contents\n- [Installation](#installation)\n- [Usage](#usage)\n- [Credits](#credits)
-- [License](#license)\n## Installation\n${data.installReq}\n`
+        tableofContents=`## Table of Contents\n- [Description](#Description)\n- [Installation](#installation)\n- [Usage](#usage)\n- [Collaborators](#Collaborators)
+- [License](#license)\n- [Tests](#Tests)\n- [Questions](#Questions)\n## Installation\n${data.installReq}\n`
     }else {
-        FullText=`# ${data.repoName} \n## Description \n${data.motivation} ${data.codeProb} ${data.learned}
-## Table of Contents\n- [Usage](#usage)\n- [Credits](#credits)\n- [License](#license)\n`
+        tableofContents=`## Table of Contents\n- [Usage](#usage)\n- [Credits](#credits)\n- [License](#license)\n`
     }
-    FullText+=`## Usage\n${data.usage}\n`
+    usage=`## Usage\n${data.usage}\n`
     if(data.ynCredit===true){
-        FullText+=`## Collaborators\n${data.collabs}\n${data.creators}\n`
+        Collaborators=`## Collaborators\n${data.collabs}\n${data.creators}\n`
+    }else{
+        Collaborators=``
     }
+    let license=``
+    let licensebadge=``
     switch(data.listLicense){
         case 'None':
-            FullText+=`## License\n This application is not covered under any licenses.`
+           license=`## License\n This application is not covered under any licenses.\n`
+           licensebadge=``
             break;
         case 'Apache License 2.0':
-            FullText+=`## License\n This application is covered under the ${data.listLicense}.`
+           license=`## License\n This application is covered under the ${data.listLicense}.\n`
+           licensebadge=`![](https://img.shields.io/badge/license-Apache%20License%202.0-brightgreen)`
             break;
         case 'MIT License':
-            FullText+=`## License\n This application is covered under the ${data.listLicense}.`
+            license=`## License\n This application is covered under the ${data.listLicense}.\n`
+            licensebadge=`![](https://img.shields.io/badge/license-MIT%20License-brightgreen)`
             break;
         case 'Creative Commons Zero v1.0 Universal':
-            FullText+=`## License\n This application is covered under the ${data.listLicense} license.`
+            license=`## License\n This application is covered under the ${data.listLicense} license.\n`
+            licensebadge=`![](https://img.shields.io/badge/license-MIT%20License-brightgreen)`
             break;
         case 'GNU Affero General Public License v3.0':
-            FullText+=`## License\n This application is covered under the ${data.listLicense}.`
+            license=`## License\n This application is covered under the ${data.listLicense}.\n`
+            licensebadge=`![](https://img.shields.io/badge/license-GNU%20Affero%20General%20Public%20License%20v3.0-brightgreen)`
             break;
         case 'Mozilla Public License 2.0':
-            FullText+=`## License\n This application is covered under the ${data.listLicense}.`
+            license=`## License\n This application is covered under the ${data.listLicense}.\n`
+            licensebadge=`![](https://img.shields.io/badge/license-Mozilla%20Public%20License%202.0-brightgreen)`
             break;    
         case 'The Unlicense':
-            FullText+=`## License\n This application is covered under ${data.listLicense} license.`
+            license=`## License\n This application is covered under ${data.listLicense} license.\n`
+            licensebadge=`![](https://img.shields.io/badge/license-The%20Unlicense-brightgreen)`
             break;     
     }
+    let tests=``
+    if(data.ynTests===true){
+       tests=`## Tests\n${data.runningTests}`
+    }
+    Questions=
+`## Questions
+If you have any questions, please reach to me via GitHub:\n
+[Chris Koilparampil](https://github.com/${data.userName})\n
+Or if you would prefer to email me, please email me at:\n
+[${data.eMail}](${data.eMail})`
+
+FullText=Title+`\n`+licensebadge+`\n`+Description+tableofContents+usage+Collaborators+license+tests+Questions
+console.log(FullText)
+
+
+
+
     fs.writeFile(fileName,FullText,function (err) {
              if (err) throw err;
             console.log('README.md Saved!');})
@@ -162,7 +190,11 @@ answers= {
     ynCredit: true,
     collabs: 'i actuall liked the team I had for project one, so those Guys',
     creators: 'BLah, blah BlaH',
-    listLicense: 'None'
+    listLicense: 'The Unlicense',
+    ynTests: true,
+    runningTests: 'this is a large note\r\n',
+    userName: 'Koilparampil',
+    eMail:"koilparampil0126@gmail.com"
   }
 writeToFile("./createdReadMe/README.md",answers);
 
