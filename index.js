@@ -152,7 +152,7 @@ function writeToFile(fileName, data) {
     Questions=
 `## Questions
 If you have any questions, please reach to me via GitHub:\n
-[Chris Koilparampil](https://github.com/${data.userName})\n
+[${data.userName}](https://github.com/${data.userName})\n
 Or if you would prefer to email me, please email me at:\n
 [${data.eMail}](${data.eMail})`
 

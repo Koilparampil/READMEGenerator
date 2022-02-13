@@ -27,7 +27,14 @@ Then, run the index.js file using node with the command:
 
 `node .\index.js`
 
-This will bring you multiple questions you will have to answer. Answer the Questions to the best of your abilities. After you are finished answering the questions, you will find your Brand New README  in the createdReadMe Folder.
+This will bring you multiple questions you will have to answer. 
+
+![the inputs for this ReadMe](Assets/img/inputScreenShot.png)
+
+
+Answer the Questions to the best of your abilities. After you are finished answering the questions, you will find your Brand New README  in the createdReadMe Folder.
+
+A video demonstration can be found [here](https://drive.google.com/file/d/17gu3rXo4t7GPmZUSdsyBL5HRYuD0Qi2H/view?usp=sharing)
 
 ## Collaborators
 I would like to thank the creator of the inquirer package, without who's code, i could not make this README generator. I would alo like to thank mozilla for their extensive documentation on JavaScript. 
