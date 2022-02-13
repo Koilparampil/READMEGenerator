@@ -64,13 +64,78 @@ const questions = [
         name: 'listLicense',
         choices: licenses,
     },
+    {
+        type:'confirm',
+        message:'Do you have anyone to Tests?',
+        name: 'ynTests'
+    },
+    {
+        type:'editor',
+        message:'Explain what the tests are and How to Run them',
+        name: 'runningTests',
+        when:(answers)=> answers.ynTests===true
+    },
+    {
+        type:'input',
+        message:'What Is your GitHub Username',
+        name: 'userName',
+    },
+    {
+        type:'input',
+        message:'What Is your email',
+        name: 'eMail',
+    },
 ];
 
 // TODO: Create a function to write README file
 function writeToFile(fileName, data) {
-    console.log(fileName);
-    console.log("Space")
+    console.log("file will be created Here: ", fileName);
+    console.log("-------------------------------------")
     console.log(data);
+    let FullText=``
+    if(data.ynInst===true){
+        FullText=`# ${data.repoName} \n## Description \n${data.motivation} ${data.codeProb} ${data.learned}
+## Table of Contents\n- [Installation](#installation)\n- [Usage](#usage)\n- [Credits](#credits)
+- [License](#license)\n## Installation\n${data.installReq}\n`
+    }else {
+        FullText=`# ${data.repoName} \n## Description \n${data.motivation} ${data.codeProb} ${data.learned}
+## Table of Contents\n- [Usage](#usage)\n- [Credits](#credits)\n- [License](#license)\n`
+    }
+    FullText+=`## Usage\n${data.usage}\n`
+    if(data.ynCredit===true){
+        FullText+=`## Collaborators\n${data.collabs}\n${data.creators}\n`
+    }
+    switch(data.listLicense){
+        case 'None':
+            FullText+=`## License\n This application is not covered under any licenses.`
+            break;
+        case 'Apache License 2.0':
+            FullText+=`## License\n This application is covered under the ${data.listLicense}.`
+            break;
+        case 'MIT License':
+            FullText+=`## License\n This application is covered under the ${data.listLicense}.`
+            break;
+        case 'Creative Commons Zero v1.0 Universal':
+            FullText+=`## License\n This application is covered under the ${data.listLicense} license.`
+            break;
+        case 'GNU Affero General Public License v3.0':
+            FullText+=`## License\n This application is covered under the ${data.listLicense}.`
+            break;
+        case 'Mozilla Public License 2.0':
+            FullText+=`## License\n This application is covered under the ${data.listLicense}.`
+            break;    
+        case 'The Unlicense':
+            FullText+=`## License\n This application is covered under ${data.listLicense} license.`
+            break;     
+    }
+    fs.writeFile(fileName,FullText,function (err) {
+             if (err) throw err;
+            console.log('README.md Saved!');})
+
+
+
+
+
 
 }
 
@@ -78,18 +143,28 @@ function writeToFile(fileName, data) {
 function init() {
     inquirer
     .prompt(questions)
-    .then(writeToFile("readMe.md",answers));
-
-
-
-
-
+    .then(function(answers){
+        writeToFile("./createdReadMe/README.md",answers);
+    });
 }
 
 // Function call to initialize app
-init();
+//init();
 
-
+answers= {
+    repoName: 'NameOfRepo',
+    motivation: 'theres a motivation here, i Promise. Blah blah blah.',
+    codeProb: 'a problem was definitely solved here',
+    learned: 'I learned how to use Inquirer and how to sspell ',       
+    ynInst: true,
+    installReq: 'these are the Steps of Installation, i should make this an external notepad thing as well',
+    usage: 'this is a large note\r\n',
+    ynCredit: true,
+    collabs: 'i actuall liked the team I had for project one, so those Guys',
+    creators: 'BLah, blah BlaH',
+    listLicense: 'None'
+  }
+writeToFile("./createdReadMe/README.md",answers);
 
 
 
