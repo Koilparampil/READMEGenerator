@@ -43,7 +43,8 @@ I would like to thank the creator of the inquirer package, without who's code, i
  This application is covered under the [MIT License](LICENSE).
  
 ## Tests
-There are no Tests for this Project.## Questions
+There are no Tests for this Project.
+## Questions
 If you have any questions, please reach to me via GitHub:
 
 [Chris Koilparampil](https://github.com/Koilparampil)
